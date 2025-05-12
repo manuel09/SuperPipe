@@ -1,7 +1,7 @@
-cd PipePipeClient
+cd SuperPipeClient
 git pull
 git push git@codeberg.org:Manuel09/SuperPipeClient.git
-cd ../PipePipeExtractor
+cd ../SuperPipeExtractor
 git pull
 git push git@codeberg.org:Manuel09/SuperPipeExtractor.git
 cd ..
