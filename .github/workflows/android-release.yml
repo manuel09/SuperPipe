@@ -44,10 +44,25 @@ jobs:
           distribution: "temurin"
           cache: 'gradle'
 
-      - name: Build release APK
+      - name: Setup release keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 -d > release.keystore
+
+      - name: Build signed release APK
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.RELEASE_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.RELEASE_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.RELEASE_KEY_PASSWORD }}
         run: |
           cd SuperPipeClient
-          ./gradlew assembleRelease lintRelease --stacktrace -DskipFormatKtlint
+          ./gradlew assembleRelease \
+            -PreleaseStoreFile=../release.keystore \
+            -PreleaseStorePassword=$KEYSTORE_PASSWORD \
+            -PreleaseKeyAlias=$KEY_ALIAS \
+            -PreleaseKeyPassword=$KEY_PASSWORD \
+            --stacktrace -DskipFormatKtlint
 
       - name: Upload release APKs
         uses: actions/upload-artifact@v4
