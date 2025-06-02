@@ -16,3 +16,9 @@
 [submodule "PipePipeExtractor"]
 	path = PipePipeExtractor
 	url = git@github.com:InfinityLoop1308/PipePipeExtractor.git
+[submodule "SuperPipeClient"]
+	path = SuperPipeClient
+	url = https://github.com/manuel09/SuperPipeClient.git
+[submodule "SuperPipeExtractor"]
+	path = SuperPipeExtractor
+	url = https://github.com/manuel09/SuperPipeExtractor.git
